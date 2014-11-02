@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BlackJack Card Counter Pro</string>
+    <string name="app_name_shorten">BJ Card Counter Pro</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_black_jack_info">BlackJackInfoActivity</string>
+
+</resources>
