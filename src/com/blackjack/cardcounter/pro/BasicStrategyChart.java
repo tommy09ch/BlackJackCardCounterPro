@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.example.blackjackcardcountingtrainerpro.R;
+import com.gen.blackjack.cardcounter.pro.R;
 
 import android.content.Context;
 

@@ -1,6 +1,6 @@
 package com.blackjack.cardcounter.pro;
 
-import com.example.blackjackcardcountingtrainerpro.R;
+import com.gen.blackjack.cardcounter.pro.R;
 
 import android.app.Activity;
 import android.os.Bundle;
