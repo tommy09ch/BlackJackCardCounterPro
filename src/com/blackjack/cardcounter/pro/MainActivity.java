@@ -19,11 +19,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -63,20 +66,23 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			popsetSwitch_count;
 	CheckBox popinstCB_hide;
 
-	float CARD_ANIM_START_X, CARD_ANIM_START_Y, player_endx, player_endy,
-			dealer_endx, dealer_endy;
+	private float CARD_ANIM_START_X, CARD_ANIM_START_Y, player_endx,
+			player_endy, dealer_endx, dealer_endy, xdpi, ydpi, increPosXFactor,
+			increPosYFactor, initPosYFactor, alertBoxWidth = -1;
 
 	private Hand player, dealer, player_splithand;
 	private Deck deck;
 	private BasicStrategyChart bsc;
 
+	private final int NUM_OF_DECK = 6;
 	private int player_bank = 1000, bet = 5, flipCardId = 0,
-			numbhandplayed = 0, correctPlay = 0, incorrectPlay = 0;
+			numbhandplayed = 0, correctPlay = 0, incorrectPlay = 0,
+			cardWidth = 0, cardHeight = 0;
 	private boolean splitFlag = false, splitChecker = false, repeatBet = false,
 			settingEnableTips = true, hitEnable, surrendEnable, splitEnable,
 			doublEnable, standEnable, shouldHit = false, shouldStand = false,
 			shouldSplit = false, shouldSurrender = false, shouldDouble = false,
-			newgame = false, showInstruction = true;
+			showInstruction = true;
 
 	private SimpleGestureFilter detector;
 	private LinkedList<MyImageHolder> imageLinkedList = new LinkedList<MyImageHolder>();
@@ -103,12 +109,20 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		rl = (RelativeLayout) findViewById(R.id.mainLayout);
 
 		getWindowManager().getDefaultDisplay().getSize(size);
-		System.out.println(size.x + "," + size.y);
+		// System.out.println(size.x + "," + size.y);
 
 		CARD_ANIM_START_X = size.x;
 		CARD_ANIM_START_Y = 0;
+
+		xdpi = getResources().getDisplayMetrics().xdpi;
+		ydpi = getResources().getDisplayMetrics().ydpi;
+
+		setupFactorXY();
+
+		// System.out.println("DPI: " + initPosXFactor + "," + initPosYFactor);
+
 		player_endx = (float) (size.x / 4);
-		player_endy = (float) (size.y - (size.y / 2.5));
+		player_endy = (float) (size.y - (size.y / initPosYFactor));
 		dealer_endx = (float) (size.x / 4);
 		dealer_endy = 0;
 
@@ -123,10 +137,10 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		setupInstructionAlert();
 		initializeViews();
 
-		File savedObject = new File(sdPath
+		File savedSetting = new File(sdPath
 				+ "/BlackJackCCTP/saved/setting.data");
 		try {
-			FileInputStream f_in = new FileInputStream(savedObject);
+			FileInputStream f_in = new FileInputStream(savedSetting);
 			ObjectInputStream obj_in = new ObjectInputStream(f_in);
 			showInstruction = obj_in.readBoolean();
 			if (showInstruction)
@@ -135,7 +149,6 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 				popinstCB_hide.setChecked(true);
 			f_in.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -146,9 +159,9 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 				prepInfoAndSettings();
 				popup_settingAlert.show();
-				int width = (size.x > 1000) ? 1000 : size.x;
 				int height = (int) ((size.y > 1500) ? 1200 : size.y / 1.2);
-				popup_settingAlert.getWindow().setLayout(width, height);
+				popup_settingAlert.getWindow().setLayout((int) alertBoxWidth,
+						height);
 			}
 
 		});
@@ -184,8 +197,7 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 	private void openingMenu() {
 		popup_openingMenuAlert.show();
-		int width = (size.x > 1000) ? 1000 : size.x;
-		popup_openingMenuAlert.getWindow().setLayout(width,
+		popup_openingMenuAlert.getWindow().setLayout((int) alertBoxWidth,
 				LayoutParams.WRAP_CONTENT);
 	}
 
@@ -193,10 +205,10 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		resetForNewHand();
 		player.resetHand();
 		dealer.resetHand();
+		bet = (bet > player_bank) ? 5 : bet;
 		if (!repeatBet)
 			placeBet();
 		else {
-			bet = (bet > player_bank) ? 5 : bet;
 			player.setBetholder(bet);
 			beginDeal();
 		}
@@ -229,8 +241,8 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 				ImageView tmpCardImg = getCardImage(deck.peek(), false);
 				runDealAnim(tmpCardImg, player_endx, player_endy, "player");
-				player_endx += 40;
-				player_endy += 15;
+				player_endx += increPosXFactor;
+				player_endy += increPosYFactor;
 
 				curHand.recieveDealtedCard(deck.dealtCard());
 				updateInfo(curHand.getName());
@@ -262,15 +274,17 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 						public void onFinish() {
 							doubl.setEnabled(true);
 							splitFlag = false;
-							player_endx = (float) (size.x / 2) + 40;
-							player_endy = (float) (size.y - (size.y / 2.5)) + 15;
+							player_endx = (float) (size.x / 2)
+									+ increPosXFactor;
+							player_endy = (size.y - (size.y / initPosYFactor))
+									+ increPosYFactor;
 
 							ImageView tmpCardImg = getCardImage(deck.peek(),
 									false);
 							runDealAnim(tmpCardImg, player_endx, player_endy,
 									"player");
-							player_endx += 40;
-							player_endy += 15;
+							player_endx += increPosXFactor;
+							player_endy += increPosYFactor;
 
 							player_splithand.recieveDealtedCard(deck
 									.dealtCard());
@@ -297,13 +311,14 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 				} else {
 					splitFlag = false;
 					doubl.setEnabled(true);
-					player_endx = (float) (size.x / 2) + 40;
-					player_endy = (float) (size.y - (size.y / 2.5)) + 15;
+					player_endx = (float) (size.x / 2) + increPosXFactor;
+					player_endy = (size.y - (size.y / initPosYFactor))
+							+ increPosYFactor;
 
 					ImageView tmpCardImg = getCardImage(deck.peek(), false);
 					runDealAnim(tmpCardImg, player_endx, player_endy, "player");
-					player_endx += 40;
-					player_endy += 15;
+					player_endx += increPosXFactor;
+					player_endy += increPosYFactor;
 
 					player_splithand.recieveDealtedCard(deck.dealtCard());
 					updateInfo("split");
@@ -318,8 +333,8 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 			@Override
 			public void onClick(View v) {
-				player_endx += 100;
-				player_endy -= 15;
+				player_endx += (increPosXFactor * 3) - increPosXFactor;
+				player_endy -= increPosYFactor;
 				ImageView tmpCardImg = getCardImage(deck.peek(), false);
 				runDealAnim(tmpCardImg, player_endx, player_endy, "player");
 				curHand.setBetholder(curHand.getBetholder() * 2);
@@ -350,15 +365,17 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 						public void onFinish() {
 							splitFlag = false;
 
-							player_endx = (float) (size.x / 2) + 40;
-							player_endy = (float) (size.y - (size.y / 2.5)) + 15;
+							player_endx = (float) (size.x / 2)
+									+ increPosXFactor;
+							player_endy = (size.y - (size.y / initPosYFactor))
+									+ increPosYFactor;
 
 							ImageView tmpCardImg = getCardImage(deck.peek(),
 									false);
 							runDealAnim(tmpCardImg, player_endx, player_endy,
 									"player");
-							player_endx += 40;
-							player_endy += 15;
+							player_endx += increPosXFactor;
+							player_endy += increPosYFactor;
 
 							player_splithand.recieveDealtedCard(deck
 									.dealtCard());
@@ -390,8 +407,9 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 			@Override
 			public void onClick(View v) {
-				player_endx = 40;
-				player_endy = (float) (size.y - (size.y / 2.5)) + 15;
+				player_endx = increPosXFactor;
+				player_endy = (size.y - (size.y / initPosYFactor))
+						+ increPosYFactor;
 
 				splitFlag = true;
 				splitChecker = true;
@@ -420,8 +438,8 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 				ImageView tmpCardImg = getCardImage(deck.peek(), false);
 				runDealAnim(tmpCardImg, player_endx, player_endy, "player");
-				player_endx += 40;
-				player_endy += 15;
+				player_endx += increPosXFactor;
+				player_endy += increPosYFactor;
 
 				player_splithand = new Hand("split");
 				player_splithand.setBetholder(bet);
@@ -443,11 +461,11 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 	private void dealerMoves(final boolean surrender) {
 		int dealersize = 0;
 
-		RelativeLayout.LayoutParams par = new RelativeLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		par.topMargin = (int) discarded.get(3).endy;
-		par.rightMargin = (int) discarded.get(3).endx;
-		flipCard.setLayoutParams(par);
+		// RelativeLayout.LayoutParams par = new RelativeLayout.LayoutParams(
+		// cardWidth, cardHeight);
+		// par.topMargin = (int) discarded.get(3).endy;
+		// par.rightMargin = (int) discarded.get(3).endx;
+		// flipCard.setLayoutParams(par);
 		flipCard.bringToFront();
 		flipCard.setImageResource(flipCardId);
 
@@ -460,7 +478,7 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 				dealersize++;
 				imageLinkedList.add(new MyImageHolder(getCardImage(deck.peek(),
 						false), "dealer", dealer_endx, dealer_endy));
-				dealer_endx += 40;
+				dealer_endx += increPosXFactor;
 				dealer.recieveDealtedCard(deck.dealtCard());
 			}
 			if (!imageLinkedList.isEmpty()) {
@@ -474,8 +492,8 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		new CountDownTimer((dealersize * 1000), 1000) {
 			public void onFinish() {
 				if (surrender) {
-					Toast.makeText(MainActivity.this, "Surrender, You Lose!",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this, "Surrender, You Lose",
+							Toast.LENGTH_SHORT).show();
 					dealerWins(false, player.getBetholder());
 				} else {
 					if (splitChecker) {
@@ -496,32 +514,32 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		String winner = "";
 		if (dealer.blackJack() && plhand.blackJack()) {
 			push(anoth);
-			winner = "Push!";
+			winner = "Push";
 		} else if (plhand.blackJack()) {
 			playerWins(anoth, plhand.getBetholder()
 					+ (plhand.getBetholder() / 2));
-			winner = "$ BlackJack $ You Win!";
+			winner = "$ BlackJack $";
 		} else if (dealer.blackJack()) {
 			dealerWins(anoth, plhand.getBetholder());
-			winner = "You Lose!";
+			winner = "You Lose";
 		} else if (plhand.busted()) {
 			dealerWins(anoth, plhand.getBetholder());
-			winner = "Busted, You Lose!";
+			winner = "Busted";
 		} else if (dealer.busted() && !plhand.busted()) {
 			playerWins(anoth, plhand.getBetholder());
-			winner = "You Win!";
+			winner = "You Win";
 		} else if (plhand.getBestScore() > dealer.getBestScore()) {
 			playerWins(anoth, plhand.getBetholder());
-			winner = "You Win!";
+			winner = "You Win";
 		} else if (dealer.getBestScore() > plhand.getBestScore()) {
 			dealerWins(anoth, plhand.getBetholder());
-			winner = "You Lose!";
+			winner = "You Lose";
 		} else {
 			push(anoth);
-			winner = "Push!";
+			winner = "Push";
 		}
 
-		Toast.makeText(MainActivity.this, winner, Toast.LENGTH_LONG).show();
+		Toast.makeText(MainActivity.this, winner, Toast.LENGTH_SHORT).show();
 	}
 
 	private void playerWins(boolean anoth, final int handbet) {
@@ -608,19 +626,19 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		for (int i = 0; i < 2; i++) {
 			imageLinkedList.add(new MyImageHolder(getCardImage(deck.peek(),
 					false), "player", player_endx, player_endy));
-			player_endx += 40;
-			player_endy += 15;
+			player_endx += increPosXFactor;
+			player_endy += increPosYFactor;
 			player.recieveDealtedCard(deck.dealtCard());
 
 			if (i == 1) {
 				imageLinkedList.add(new MyImageHolder(flipCard, "dealer",
 						dealer_endx, dealer_endy));
 				getCardImage(deck.peek(), true);
-				dealer_endx += 40;
+				dealer_endx += increPosXFactor;
 			} else {
 				imageLinkedList.add(new MyImageHolder(getCardImage(deck.peek(),
 						false), "dealer", dealer_endx, dealer_endy));
-				dealer_endx += 145;
+				dealer_endx += increPosXFactor * 3;
 			}
 			dealer.recieveDealtedCard(deck.dealtCard());
 		}
@@ -659,63 +677,43 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 	}
 
 	private void endOfGame() {
-		popsumTV_handsplayed.setText("Hands Played: " + numbhandplayed);
-		popsumTV_correctplays.setText("Correct Moves: " + correctPlay);
-		popsumTV_incorrectplays.setText("Wrong Moves: " + incorrectPlay);
-		popsumTV_winnings.setText("Winnings/Losses: $" + (player_bank - 1000));
-		popsumTV_bank.setText("Bank: $" + player_bank);
+		popsumTV_handsplayed.setText(Integer.toString(numbhandplayed));
+		popsumTV_correctplays.setText(Integer.toString(correctPlay));
+		popsumTV_incorrectplays.setText(Integer.toString(incorrectPlay));
+		popsumTV_winnings.setText("$" + (player_bank - 1000));
+		popsumTV_bank.setText("$" + player_bank);
 
 		popup_summaryAlert.show();
-		int width = (size.x > 1000) ? 750 : size.x;
-		popup_summaryAlert.getWindow().setLayout(width,
+		popup_summaryAlert.getWindow().setLayout((int) alertBoxWidth,
 				LayoutParams.WRAP_CONTENT);
 	}
 
 	private void saveGameState() {
 
-		if (savedObject.exists()) {
-			try {
-				FileOutputStream f_out = new FileOutputStream(savedObject);
-				ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-
-				obj_out.writeObject(deck);
-				obj_out.writeInt(player_bank);
-				obj_out.writeInt(correctPlay);
-				obj_out.writeInt(incorrectPlay);
-				obj_out.writeBoolean(popsetSwitch_repBet.isChecked());
-				obj_out.writeBoolean(popsetSwitch_hint.isChecked());
-				obj_out.writeBoolean(popsetSwitch_score.isChecked());
-				obj_out.writeBoolean(popsetSwitch_count.isChecked());
-				obj_out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-
+		if (!savedObject.exists()) {
 			File dir = new File(sdPath + "/BlackJackCCTP/saved");
 			dir.mkdirs();
 			savedObject = new File(dir, "myobject.data");
+		}
 
-			try {
-				FileOutputStream f_out = new FileOutputStream(savedObject);
-				ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
+		try {
+			FileOutputStream f_out = new FileOutputStream(savedObject);
+			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
-				obj_out.writeObject(deck);
-				obj_out.writeInt(player_bank);
-				obj_out.writeInt(correctPlay);
-				obj_out.writeInt(incorrectPlay);
-				obj_out.writeBoolean(popsetSwitch_repBet.isChecked());
-				obj_out.writeBoolean(popsetSwitch_hint.isChecked());
-				obj_out.writeBoolean(popsetSwitch_score.isChecked());
-				obj_out.writeBoolean(popsetSwitch_count.isChecked());
-				obj_out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			obj_out.writeObject(deck);
+			obj_out.writeInt(player_bank);
+			obj_out.writeInt(correctPlay);
+			obj_out.writeInt(incorrectPlay);
+			obj_out.writeInt(numbhandplayed);
+			obj_out.writeBoolean(popsetSwitch_repBet.isChecked());
+			obj_out.writeBoolean(popsetSwitch_hint.isChecked());
+			obj_out.writeBoolean(popsetSwitch_score.isChecked());
+			obj_out.writeBoolean(popsetSwitch_count.isChecked());
+			obj_out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -731,6 +729,7 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			player_bank = obj_in.readInt();
 			correctPlay = obj_in.readInt();
 			incorrectPlay = obj_in.readInt();
+			numbhandplayed = obj_in.readInt();
 			if (obj_in.readBoolean())
 				popsetSwitch_repBet.setChecked(true);
 			else
@@ -752,7 +751,6 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			}
 			f_in.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -805,9 +803,9 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			@Override
 			public void onClick(View v) {
 				popup_viewChartAlert.show();
-				int width = (size.x > 1000) ? 1000 : size.x;
 				int height = (int) ((size.y > 1500) ? 1200 : size.y / 1.2);
-				popup_viewChartAlert.getWindow().setLayout(width, height);
+				popup_viewChartAlert.getWindow().setLayout((int) alertBoxWidth,
+						height);
 			}
 
 		});
@@ -828,9 +826,8 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			@Override
 			public void onClick(View v) {
 				popup_instructionAlert.show();
-				int width = (size.x > 1000) ? 1000 : size.x;
-				popup_instructionAlert.getWindow().setLayout(width,
-						LayoutParams.WRAP_CONTENT);
+				popup_instructionAlert.getWindow().setLayout(
+						(int) alertBoxWidth, LayoutParams.WRAP_CONTENT);
 			}
 
 		});
@@ -887,7 +884,7 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 						correctPlay = 0;
 						incorrectPlay = 0;
 
-						deck = new Deck(6);
+						deck = new Deck(NUM_OF_DECK);
 						player = new Hand("player");
 						dealer = new Hand("dealer");
 						playRound();
@@ -1101,7 +1098,6 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 
 					}
 				});
@@ -1145,10 +1141,9 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 					public void onClick(View v) {
 						popup_openingMenuAlert.dismiss();
 						if (showInstruction) {
-							newgame = true;
 							displayStartInstruction();
 						} else {
-							deck = new Deck(6);
+							deck = new Deck(NUM_OF_DECK);
 							player = new Hand("player");
 							dealer = new Hand("dealer");
 							playRound();
@@ -1346,7 +1341,7 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 
-						deck = new Deck(6);
+						deck = new Deck(NUM_OF_DECK);
 						player = new Hand("player");
 						dealer = new Hand("dealer");
 						playRound();
@@ -1357,17 +1352,15 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		builder.setView(popup_instruction_temp);
 		popup_instructionAlertTemp = builder.create();
 		popup_instructionAlertTemp.show();
-		int width = (size.x > 1000) ? 1000 : size.x;
-		popup_instructionAlertTemp.getWindow().setLayout(width,
+		popup_instructionAlertTemp.getWindow().setLayout((int) alertBoxWidth,
 				LayoutParams.WRAP_CONTENT);
 	}
 
 	private void placeBet() {
-		bet = (bet > player_bank) ? 5 : bet;
 		popup_placeBetAlert.setTitle("Bank: $" + player_bank);
+		popbetTV_bet.setText(Integer.toString(bet));
 		popup_placeBetAlert.show();
-		int width = (size.x > 1000) ? 1000 : size.x;
-		popup_placeBetAlert.getWindow().setLayout(width,
+		popup_placeBetAlert.getWindow().setLayout((int) alertBoxWidth,
 				LayoutParams.WRAP_CONTENT);
 
 		Button neutralButton = popup_placeBetAlert
@@ -1470,10 +1463,12 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 	private void resetForNewHand() {
 		splitFlag = false;
 		splitChecker = false;
+
 		player_endx = (float) (size.x / 4);
-		player_endy = (float) (size.y - (size.y / 2.5));
+		player_endy = (float) (size.y - (size.y / initPosYFactor));
 		dealer_endx = (float) (size.x / 4);
 		dealer_endy = 0;
+
 		flipCard.setImageResource(R.drawable.back_red);
 		flipCard.setVisibility(View.INVISIBLE);
 
@@ -1493,6 +1488,90 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 		splitEnable = false;
 		doublEnable = false;
 		standEnable = false;
+	}
+
+	private void setupFactorXY() {
+
+		int screenLayout = getResources().getConfiguration().screenLayout;
+		screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+
+		switch (screenLayout) {
+		case Configuration.SCREENLAYOUT_SIZE_SMALL: {
+			break;
+		}
+		case Configuration.SCREENLAYOUT_SIZE_NORMAL: {
+			System.out.println("Screen is NORMAL: " + getScreenSize());
+			alertBoxWidth = -1;
+			// alertBoxWidth = TypedValue.applyDimension(
+			// TypedValue.COMPLEX_UNIT_DIP, 320, metrics);
+			break;
+		}
+		case Configuration.SCREENLAYOUT_SIZE_LARGE: {
+			System.out.println("Screen is LARGE: " + getScreenSize());
+			alertBoxWidth = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 475, metrics);
+			break;
+		}
+		case 4: { // Configuration.SCREENLAYOUT_SIZE_XLARGE is API >= 9
+			System.out.println("Screen is XLARGE: " + getScreenSize());
+			alertBoxWidth = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 650, metrics);
+			break;
+		}
+		default:
+			alertBoxWidth = -1;
+			break;
+		}
+
+		double screenInches = getScreenSize();
+		if (screenInches > 9.0) {
+			initPosYFactor = (float) 2.5;
+
+			increPosXFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 25, metrics);
+			increPosYFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 10, metrics);
+
+			cardWidth = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 180, metrics);
+			cardHeight = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 250, metrics);
+		} else if (screenInches > 5.0) {
+			initPosYFactor = (float) 2.5;
+
+			increPosXFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 20, metrics);
+			increPosYFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 5, metrics);
+
+			cardWidth = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 140, metrics);
+			cardHeight = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 195, metrics);
+		} else {
+			initPosYFactor = (float) 2.2;
+
+			increPosXFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 10, metrics);
+			increPosYFactor = TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 3, metrics);
+
+			cardWidth = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 80, metrics);
+			cardHeight = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 110, metrics);
+		}
+	}
+
+	private double getScreenSize() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		double x = Math.pow(dm.widthPixels / dm.xdpi, 2);
+		double y = Math.pow(dm.heightPixels / dm.ydpi, 2);
+		double screenInches = Math.sqrt(x + y);
+		return screenInches;
 	}
 
 	public void runDiscardCardsAnim() {
@@ -1562,11 +1641,10 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						popup_viewChartAlert.show();
-						int width = (size.x > 1000) ? 1000 : size.x;
 						int height = (int) ((size.y > 1500) ? 1200
 								: size.y / 1.2);
-						popup_viewChartAlert.getWindow().setLayout(width,
-								height);
+						popup_viewChartAlert.getWindow().setLayout(
+								(int) alertBoxWidth, height);
 
 						if (wrongPlay.equalsIgnoreCase("surrender"))
 							surrend.performClick();
@@ -1909,64 +1987,22 @@ public class MainActivity extends Activity implements SimpleGestureListener,
 			flipCardId = rId;
 			selectedImage.setImageResource(R.drawable.back_red);
 			selectedImage.setVisibility(View.INVISIBLE);
+			RelativeLayout.LayoutParams paramImage = new RelativeLayout.LayoutParams(
+					cardWidth, cardHeight);
+			selectedImage.setLayoutParams(paramImage);
 			rl.addView(selectedImage);
 			return selectedImage;
 		} else {
 			selectedImage.setImageResource(rId);
 			selectedImage.setVisibility(View.INVISIBLE);
+			RelativeLayout.LayoutParams paramImage = new RelativeLayout.LayoutParams(
+					cardWidth, cardHeight);
+			selectedImage.setLayoutParams(paramImage);
 			rl.addView(selectedImage);
 			return selectedImage;
 		}
 	}
 
-	class MyImageHolder {
-		ImageView cardImage;
-		String name;
-		float endx, endy;
-
-		public MyImageHolder(ImageView cardImage, String name,
-				float player_endx, float player_endy) {
-			super();
-			this.cardImage = cardImage;
-			this.name = name;
-			this.endx = player_endx;
-			this.endy = player_endy;
-		}
-
-		public ImageView getCardImage() {
-			return cardImage;
-		}
-
-		public void setCardImage(ImageView cardImage) {
-			this.cardImage = cardImage;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public float getEndx() {
-			return endx;
-		}
-
-		public void setEndx(float endx) {
-			this.endx = endx;
-		}
-
-		public float getEndy() {
-			return endy;
-		}
-
-		public void setEndy(float endy) {
-			this.endy = endy;
-		}
-	}
-
-	@SuppressWarnings("serial")
 	class MySaveObject implements Serializable {
 		// Deck savedDeck;
 		int savedBank, savedCorrect, savedIncorrect;
@@ -2004,13 +2040,11 @@ class SimpleGestureFilter extends SimpleOnGestureListener {
 	private boolean running = true;
 	private boolean tapIndicator = false;
 
-	private Activity context;
 	private GestureDetector detector;
 	private SimpleGestureListener listener;
 
 	public SimpleGestureFilter(Activity context, SimpleGestureListener sgl) {
 
-		this.context = context;
 		this.detector = new GestureDetector(context, this);
 		this.listener = sgl;
 	}

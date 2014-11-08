@@ -7,13 +7,14 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/blackborder"
-        android:src="@drawable/app_banner1" />
+        android:contentDescription="@string/img_desc_app_logo"
+        android:src="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/learnBJ"
@@ -23,9 +24,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/btn_action"
-        android:text="Learn The Game"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="18sp" />
+        android:text="@string/pop_om_button1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/startGame"
@@ -35,20 +36,20 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/btn_action"
-        android:text="Play BlackJack"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="18sp" />
+        android:text="@string/pop_om_button2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/resumeGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/disablestatebox"
-        android:text="Resume Game"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="18sp" />
+        android:text="@string/pop_om_button3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
 </LinearLayout>

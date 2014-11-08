@@ -3,7 +3,67 @@
 
     <string name="app_name">BlackJack Card Counter Pro</string>
     <string name="app_name_shorten">BJ Card Counter Pro</string>
+    <string name="img_desc_app_logo">App Logo</string>
+    <string name="img_desc_single_tap">Single Tap</string>
+    <string name="img_desc_swipe_right">Swipe Right</string>
+    <string name="img_desc_doubl_tap">Double Tap</string>
+    <string name="img_desc_twofings_tap">Two Fingers Tap</string>
+    <string name="img_desc_swipe_up">Swipe Up</string>
+    <string name="img_desc_flip_card">Face Down Card</string>
+    <string name="pop_chart_hard">Hard Total Chart</string>
+    <string name="pop_chart_soft">Soft Total Chart</string>
+    <string name="pop_chart_pairs">Split Pairs Chart</string>
+    <string name="pop_chart_dealer">Dealer Face Up Card</string>
+    <string name="pop_chart_player_hard">Player\'s\nHard\nTotal</string>
+    <string name="pop_chart_player_soft">Player\'s\nSoft\nTotal</string>
+    <string name="pop_chart_player_pair">Player\'s\nPair</string>
+    <string name="pop_chart_hit">H - Hit</string>
+    <string name="pop_chart_stand">S - Stand</string>
+    <string name="pop_chart_double">D - Double/Hit</string>
+    <string name="pop_chart_double_stand">Ds - Double/Stand</string>
+    <string name="pop_chart_surrender">Sur - Surrender/Hit</string>
+    <string name="pop_chart_yes">Y - Yes, split</string>
+    <string name="pop_chart_no">N - No, don\'t split</string>
+    <string name="pop_instr_1">Tap with one finger</string>
+    <string name="pop_instr_2">Fling left or right with one finger</string>
+    <string name="pop_instr_3">Double tap with one finger</string>
+    <string name="pop_instr_4">Tap with two fingers</string>
+    <string name="pop_instr_5">Fling up with one finger</string>
+    <string name="pop_instr_6">Hide in the future</string>
+    <string name="pop_om_button1">Learn The Game</string>
+    <string name="pop_om_button2">Play BlackJack</string>
+    <string name="pop_om_button3">Resume Game</string>
+    <string name="pop_setting_button1">Basic Strategy Chart</string>
+    <string name="pop_setting_button2">Instructions</string>
+    <string name="pop_setting_button3">Learn The Game</string>
+    <string name="pop_setting_button4">Start New Shoe</string>
+    <string name="pop_setting_button5">Reset and Start New Game</string>
+    <string name="pop_setting_string1">Basic Strategy Errors Ratio</string>
+    <string name="pop_setting_string2">Correct Moves</string>
+    <string name="pop_setting_string3">Wrong Moves</string>
+    <string name="pop_setting_string4">Running Count</string>
+    <string name="pop_setting_string5">True Count</string>
+    <string name="pop_setting_string6">Hands Played</string>
+    <string name="pop_setting_string7">Remaining Decks</string>
+    <string name="pop_setting_string8">Bank</string>
+    <string name="pop_setting_string9">Winnings</string>
+    <string name="pop_setting_switch1">Repeat Bet</string>
+    <string name="pop_setting_switch2">Popup Tips Alert</string>
+    <string name="pop_setting_switch3">Show Hand Scores</string>
+    <string name="pop_setting_switch4">Show Card Counter</string>
+    <string name="pop_summry_string1">Hands Played:</string>
+    <string name="pop_summry_string2">Correct Moves:</string>
+    <string name="pop_summry_string3">Wrong Moves:</string>
+    <string name="pop_summry_string4">Winnings/Losses:</string>
+    <string name="pop_summry_string5">Bank:</string>
+
+    <!-- NO CATEGORY -->
     <string name="action_settings">Settings</string>
+    <string name="hit">Hit</string>
+    <string name="stand">Stand</string>
+    <string name="doubl_down">Double Down</string>
+    <string name="split">Split</string>
+    <string name="surrender">Surrender</string>
     <string name="title_activity_black_jack_info">BlackJackInfoActivity</string>
 
 </resources>

@@ -2,286 +2,282 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp" >
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/blackborder" >
 
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" >
+                android:gravity="center"
+                android:orientation="vertical" >
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/pop_setting_string1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/popsetTV_errorRatio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/TextView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Basic Strategy Errors Ratio"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/pop_setting_string2"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/popsetTV_errorRatio"
+                        android:id="@+id/popsetTV_correctMoves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/TextView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:text="@string/pop_setting_string3"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/popsetTV_incorrectMoves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/pop_setting_string4"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/popsetTV_runCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text=""
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
                 </LinearLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/TableRow2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical" >
+                        android:text="@string/pop_setting_string5"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/TextView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Correct Moves"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_correctMoves"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/TextView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Wrong Moves"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_incorrectMoves"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/popsetTV_trueCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
                 </LinearLayout>
-            </TableRow>
+            </LinearLayout>
 
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" >
+                android:baselineAligned="false" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
+                    <TextView
+                        android:id="@+id/TextView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pop_setting_string6"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Running Count"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_runCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="True Count"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_trueCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/popsetTV_handsPlayed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
                 </LinearLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/TableRow4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
+                    <TextView
+                        android:id="@+id/TextView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pop_setting_string7"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/TextView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hands Played"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_handsPlayed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/TextView7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Remaining Decks"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_remDeck"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/popsetTV_remDeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
                 </LinearLayout>
-            </TableRow>
+            </LinearLayout>
 
-            <TableRow
-                android:id="@+id/TableRow5"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" >
+                android:baselineAligned="false" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
+                    <TextView
+                        android:id="@+id/TextView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pop_setting_string8"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/TextView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Bank"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_bank"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/TextView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Winning"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/popsetTV_winnings"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/popsetTV_bank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
                 </LinearLayout>
-            </TableRow>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/TextView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pop_setting_string9"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/popsetTV_winnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
         </TableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/blackborder"
             android:orientation="vertical" >
 
@@ -290,8 +286,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Repeat Bet"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pop_setting_switch1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Switch
@@ -299,8 +296,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Popup Tips Alert"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pop_setting_switch2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Switch
@@ -308,16 +306,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Display Hand Scores"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pop_setting_switch3"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/popsetSwitch_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Display Card Counter"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pop_setting_switch4"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -329,8 +329,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_action"
-            android:text="Basic Strategy Chart"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/pop_setting_button1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/popsetTV_instruct"
@@ -340,8 +341,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_action"
-            android:text="Instructions"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/pop_setting_button2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/popsetTV_viewBJInfo"
@@ -351,8 +353,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_action"
-            android:text="Learn The Game"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/pop_setting_button3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/popsetTV_startNewShoe"
@@ -362,19 +365,21 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_action"
-            android:text="Start New Shoe"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/pop_setting_button4"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/popsetTV_resetGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_action"
-            android:text="Reset and Start New Game"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/pop_setting_button5"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </ScrollView>

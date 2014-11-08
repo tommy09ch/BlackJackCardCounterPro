@@ -2,23 +2,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="5dp" >
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Hard Total Chart"
+            android:paddingBottom="5dp"
+            android:text="@string/pop_chart_hard"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
@@ -26,63 +27,112 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:gravity="center"
-            android:text="Dealer Face Up Card"
-            android:textStyle="bold|italic" />
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/chart_hardtotal" />
+            android:text="@string/pop_chart_dealer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12sp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="1dp" >
+            android:paddingBottom="3dp" >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="3dp"
+                android:paddingStart="0dp"
+                android:text="@string/pop_chart_player_hard"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/pop_chart_hard"
+                android:src="@drawable/chart_hardtotal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView02"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="H - Hit"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_hit"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="D - Double/Hit"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_double"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp" >
+            android:layout_gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/textView00006"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="S - Stand"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_stand"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sur - Surrender/Hit"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_surrender"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -90,125 +140,209 @@
             android:id="@+id/TextView03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Soft Total Chart"
+            android:paddingBottom="5dp"
+            android:paddingTop="20dp"
+            android:text="@string/pop_chart_soft"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/TextView08"
+            android:id="@+id/textView04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:gravity="center"
-            android:text="Dealer Face Up Card"
-            android:textStyle="bold|italic" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/chart_softtotal" />
+            android:text="@string/pop_chart_dealer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12sp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="1dp" >
+            android:paddingBottom="3dp" >
+
+            <TextView
+                android:id="@+id/textView05"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="3dp"
+                android:paddingStart="0dp"
+                android:text="@string/pop_chart_player_soft"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:id="@+id/imageView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/pop_chart_soft"
+                android:src="@drawable/chart_softtotal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/textView0006"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView06"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="H - Hit"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_hit"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView07"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="D - Double/Hit"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_double"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp" >
+            android:layout_gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/textView006"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView04"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="S - Stand"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_stand"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView05"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ds - Double/Stand"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_double_stand"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/TextView09"
+            android:id="@+id/TextView003"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Split Pairs Chart"
+            android:paddingBottom="5dp"
+            android:paddingTop="20dp"
+            android:text="@string/pop_chart_pairs"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/TextView10"
+            android:id="@+id/textView004"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:gravity="center"
-            android:text="Dealer Face Up Card"
-            android:textStyle="bold|italic" />
-
-        <ImageView
-            android:id="@+id/imageView002"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/chart_pair" />
+            android:text="@string/pop_chart_dealer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12sp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="1dp" >
+            android:paddingBottom="3dp" >
+
+            <TextView
+                android:id="@+id/textView005"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="3dp"
+                android:paddingStart="0dp"
+                android:text="@string/pop_chart_player_pair"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:id="@+id/imageView001"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/pop_chart_pairs"
+                android:src="@drawable/chart_pair" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/textView06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView006"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Y - Yes, split"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_yes"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView007"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="N - No, don&apos;t split"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:text="@string/pop_chart_no"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

@@ -69,7 +69,7 @@ public class Deck implements Serializable {
 
 		for (int iter = 0; iter < 5; iter++) {
 			for (int card = 0; card < (numOfDeck * 52); card++) {
-				swapind = Math.abs(rand.nextInt() % 312);
+				swapind = Math.abs(rand.nextInt() % (numOfDeck * 52));
 				Card tmpCard = deckOfCard[card];
 				deckOfCard[card] = deckOfCard[swapind];
 				deckOfCard[swapind] = tmpCard;

@@ -24,8 +24,8 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hit"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/hit"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <TextView
@@ -33,14 +33,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView1"
-                android:text="Tap once with one finger" />
+                android:text="@string/pop_instr_1"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
             <ImageView
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:contentDescription="@string/img_desc_single_tap"
                 android:src="@drawable/touch_single_tap" />
         </RelativeLayout>
 
@@ -54,8 +56,8 @@
                 android:id="@+id/textView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stand"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/stand"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <TextView
@@ -63,14 +65,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView01"
-                android:text="Fling left or right with one finger" />
+                android:text="@string/pop_instr_2"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
             <ImageView
                 android:id="@+id/imageView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:contentDescription="@string/img_desc_swipe_right"
                 android:src="@drawable/touch_swipe_right" />
         </RelativeLayout>
 
@@ -84,8 +88,8 @@
                 android:id="@+id/TextView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Double Down"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/doubl_down"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <TextView
@@ -93,14 +97,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TextView02"
-                android:text="Double tap with one finger" />
+                android:text="@string/pop_instr_3"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
             <ImageView
                 android:id="@+id/ImageView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:contentDescription="@string/img_desc_doubl_tap"
                 android:src="@drawable/touch_double_tap" />
         </RelativeLayout>
 
@@ -114,8 +120,8 @@
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Split"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/split"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <TextView
@@ -123,15 +129,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TextView03"
-                android:text="Tap with two fingers" />
+                android:text="@string/pop_instr_4"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
             <ImageView
                 android:id="@+id/ImageView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/touch_two_finger_tap" />
+                android:contentDescription="@string/img_desc_twofings_tap"
+                android:src="@drawable/touch_two_fingers_tap" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -144,8 +152,8 @@
                 android:id="@+id/TextView06"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Surrender"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/surrender"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <TextView
@@ -153,14 +161,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TextView06"
-                android:text="Fling up with one finger" />
+                android:text="@string/pop_instr_5"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
             <ImageView
                 android:id="@+id/ImageView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:contentDescription="@string/img_desc_swipe_up"
                 android:src="@drawable/touch_swipe_up" />
         </RelativeLayout>
     </LinearLayout>
@@ -178,8 +188,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:text="Hide in the future"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/pop_instr_6"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckBox
             android:id="@+id/popinst_hide"
